@@ -7,278 +7,452 @@
     <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
     <style>
         :root {
-            --primary-bg: #06121e;
-            --secondary-bg: #0b1a2a;
-            --nav-bg: #122a3a;
-            --text-color: #fff;
-            --accent-color: #dcf836;
-            --ad-bg: rgba(255, 0, 0, 0.2);
+            /* Modern Streaming Platform Color Scheme */
+            --primary-bg: #0a0e17;
+            --secondary-bg: #151c2c;
+            --nav-bg: #1a2235;
+            --text-color: #ffffff;
+            --text-muted: #a0a7b7;
+            --accent-primary: #3557ff;
+            --accent-secondary: #4ae6ff;
+            --gradient-primary: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            --card-bg: #1e2738;
+            --hover-bg: #252d40;
+            --ad-bg: rgba(26, 34, 53, 0.9);
+            
+            /* Spacing */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            
+            /* Transitions */
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
             font-family: 'Nunito', sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: var(--primary-bg);
             color: var(--text-color);
-            text-align: center;
+            line-height: 1.6;
         }
 
+        /* Header Styles */
         .header {
             background-color: var(--secondary-bg);
+            padding: var(--spacing-md);
             display: flex;
             align-items: center;
-            justify-content: flex-start;
-            padding: 10px;
-            position: relative;
+            justify-content: space-between;
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .header img {
-            width: 90px;
-            margin-right: -10px;
-            height: auto;
-        }
-
-        .header .website-name {
-            font-family: 'Dosis', sans-serif;
-            font-size: 24px;
-            color: var(--text-color);
-        }
-
-        .navigation {
-            background-color: var(--nav-bg);
-            padding: 10px 0;
+        .logo-container {
             display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
         }
 
-        .navigation a {
-            color: var(--text-color);
-            text-decoration: none;
-            padding: 10px 15px;
-            transition: color 0.3s ease;
+        .website-name {
             font-family: 'Dosis', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
-        .navigation a:hover {
-            color: var(--accent-color);
-        }
-
+        /* Enhanced Search Bar */
         .search-container {
-            position: absolute;
-            top: 50%;
-            right: 20px;
-            transform: translateY(-50%);
-            display: flex;
+            position: relative;
+            max-width: 400px;
+            width: 100%;
         }
 
-        .search-container input[type="text"] {
-            padding: 10px;
-            font-size: 16px;
-            border: 2px solid var(--text-color);
-            background-color: var(--primary-bg);
+        .search-container input {
+            width: 100%;
+            padding: var(--spacing-md) var(--spacing-xl);
+            background: var(--card-bg);
+            border: 2px solid transparent;
+            border-radius: 8px;
             color: var(--text-color);
-            border-radius: 4px 0 0 4px;
-            width: 200px;
+            font-size: 1rem;
+            transition: var(--transition-normal);
+        }
+
+        .search-container input:focus {
+            border-color: var(--accent-primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(53, 87, 255, 0.2);
         }
 
         .search-container button {
-            padding: 10px 15px;
-            background-color: var(--text-color);
-            color: var(--primary-bg);
+            position: absolute;
+            right: var(--spacing-sm);
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
             border: none;
+            color: var(--text-muted);
             cursor: pointer;
-            border-radius: 0 4px 4px 0;
-            transition: background-color 0.3s ease;
+            padding: var(--spacing-sm);
+            transition: var(--transition-fast);
         }
 
         .search-container button:hover {
-            background-color: #464646;
+            color: var(--accent-primary);
         }
 
-        .videos {
+        /* Navigation */
+        .navigation {
+            background-color: var(--nav-bg);
+            padding: var(--spacing-md);
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            gap: 20px;
-            padding: 20px;
+            gap: var(--spacing-lg);
+            flex-wrap: wrap;
         }
 
-        .video-ft {
-            flex: 1;
-            max-width: 800px;
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: 6px;
+            transition: var(--transition-normal);
         }
 
-        .video-ft iframe {
+        .nav-link:hover {
+            color: var(--text-color);
+            background-color: var(--hover-bg);
+        }
+
+        .nav-link.active {
+            color: var(--accent-primary);
+            background-color: rgba(53, 87, 255, 0.1);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: var(--spacing-xl);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Enhanced Video Section */
+        .video-section {
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .video-container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .video-container iframe {
             width: 100%;
             aspect-ratio: 16/9;
             border: none;
         }
 
-        .advertising-box-left,
-        .advertising-box-right {
-            width: 150px;
-            height: 300px;
-            background-color: var(--ad-bg);
-            border: 1px dashed red;
+        .ad-space {
+            background: var(--ad-bg);
+            border-radius: 8px;
+            padding: var(--spacing-md);
+            height: min-content;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        /* Enhanced Carousel */
         .movie-carousel {
+            margin-top: var(--spacing-xl);
+            padding: var(--spacing-md);
+            background: var(--card-bg);
+            border-radius: 12px;
             overflow: hidden;
-            margin: 20px 0;
+        }
+
+        .carousel-title {
+            text-align: left;
+            margin-bottom: var(--spacing-lg);
+            color: var(--text-color);
+            font-size: 1.5rem;
         }
 
         .carousel-container {
             display: flex;
-            gap: 10px;
-            animation: scroll 30s linear infinite;
+            gap: var(--spacing-md);
+            animation: smoothScroll 30s linear infinite;
         }
 
-        .carousel-slide img {
-            width: 120px;
-            height: 170px;
+        .movie-card {
+            flex: 0 0 180px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            transition: var(--transition-normal);
+            cursor: pointer;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: 270px;
             object-fit: cover;
-            loading="lazy"
+            border-radius: 8px;
+            transition: var(--transition-normal);
         }
 
-        @keyframes scroll {
+        .movie-card:hover img {
+            filter: brightness(1.2);
+        }
+
+        .movie-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: var(--spacing-md);
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            transform: translateY(100%);
+            transition: var(--transition-normal);
+        }
+
+        .movie-card:hover .movie-info {
+            transform: translateY(0);
+        }
+
+        @keyframes smoothScroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-130px * 18)); }
+            100% { transform: translateX(calc(-180px * 9 - var(--spacing-md) * 9)); }
         }
 
-        @media (max-width: 768px) {
-            .advertising-box-left,
-            .advertising-box-right {
-                display: none;
-            }
-
-            .search-container {
-                position: static;
-                transform: none;
-                margin: 10px auto;
-                width: 90%;
-                max-width: 300px;
-            }
-
-            .search-container input[type="text"] {
-                width: 100%;
-            }
-
-            .header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .navigation a {
-                padding: 8px;
-                font-size: 14px;
-            }
-        }
-
+        /* Footer */
         .footer {
             background-color: var(--secondary-bg);
-            padding: 20px;
-            margin-top: 40px;
+            padding: var(--spacing-xl);
+            margin-top: var(--spacing-xl);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-xl);
+        }
+
+        .footer-section {
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            color: var(--text-color);
+            margin-bottom: var(--spacing-md);
+            font-size: 1.2rem;
+        }
+
+        .footer-section p {
+            color: var(--text-muted);
+            margin-bottom: var(--spacing-sm);
         }
 
         .social-icons {
             display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 15px;
-            margin: 15px 0;
+            transition: var(--transition-normal);
         }
 
-        .social-icons svg {
-            width: 24px;
-            height: 24px;
-            fill: currentColor;
-            transition: color 0.3s ease;
+        .social-icon:hover {
+            background: var(--accent-primary);
+            transform: translateY(-2px);
         }
 
-        .social-icons svg:hover {
-            color: var(--accent-color);
+        .social-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .video-section {
+                grid-template-columns: 1fr;
+            }
+
+            .ad-space {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: var(--spacing-md);
+                text-align: center;
+            }
+
+            .search-container {
+                max-width: 100%;
+            }
+
+            .navigation {
+                gap: var(--spacing-sm);
+            }
+
+            .nav-link {
+                font-size: 0.9rem;
+            }
+
+            .movie-card {
+                flex: 0 0 140px;
+            }
+
+            .movie-card img {
+                height: 210px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
     <header class="header">
-        <img src="/api/placeholder/90/90" alt="Full Movies Logo">
-        <span class="website-name">FULL MOVIES</span>
+        <div class="logo-container">
+            <div class="logo">FM</div>
+            <span class="website-name">FULL MOVIES</span>
+        </div>
         <form class="search-container" role="search">
-            <input type="text" placeholder="Search movies..." name="search" aria-label="Search movies">
-            <button type="submit" aria-label="Search">🔍</button>
+            <input type="text" placeholder="Search movies, shows, and more..." name="search" aria-label="Search content">
+            <button type="submit" aria-label="Search">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="currentColor" d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.39zM11 18a7 7 0 1 1 7-7 7 7 0 0 1-7 7z"/>
+                </svg>
+            </button>
         </form>
     </header>
 
     <nav class="navigation" role="navigation">
-        <a href="index.html">HOME</a>
-        <a href="movies.html">MOVIES</a>
-        <a href="celebrities.html">CELEBRITIES</a>
-        <a href="news.html">NEWS</a>
-        <a href="community.html">COMMUNITY</a>
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="movies.html" class="nav-link">Movies</a>
+        <a href="tv-shows.html" class="nav-link">TV Shows</a>
+        <a href="new-releases.html" class="nav-link">New Releases</a>
+        <a href="my-list.html" class="nav-link">My List</a>
     </nav>
 
-    <main>
-        <section class="movies">
-            <h1>Streaming Movies</h1>
-            <div class="videos">
-                <aside class="advertising-box-left" role="complementary">
-                    <p>Advertisement</p>
-                </aside>
-                
-                <div class="video-ft">
-                    <iframe title="Featured Video" src="https://www.youtube.com/embed/baaNwRAhHBo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                
-                <aside class="advertising-box-right" role="complementary">
-                    <p>Advertisement</p>
-                </aside>
+    <main class="main-content">
+        <section class="video-section">
+            <aside class="ad-space" role="complementary">
+                <div class="ad-content">Advertisement Space</div>
+            </aside>
+            
+            <div class="video-container">
+                <iframe 
+                    title="Featured Content"
+                    src="https://www.youtube.com/embed/baaNwRAhHBo"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
             </div>
+
+            <aside class="ad-space" role="complementary">
+                <div class="ad-content">Advertisement Space</div>
+            </aside>
         </section>
 
-        <section class="movie-carousel" aria-label="Movie Carousel">
+        <section class="movie-carousel" aria-label="Popular Movies">
+            <h2 class="carousel-title">Popular Movies</h2>
             <div class="carousel-container">
-                <div class="carousel-slide">
-                    <!-- Repeated movie items with lazy loading -->
-                    <img src="/api/placeholder/120/170" alt="Movie 1" loading="lazy">
-                    <img src="/api/placeholder/120/170" alt="Movie 2" loading="lazy">
-                    <!-- Add more movies as needed -->
+                <!-- Movie Cards - Repeated for smooth infinite scroll -->
+                <div class="movie-card">
+                    <img src="/api/placeholder/180/270" alt="Movie 1" loading="lazy">
+                    <div class="movie-info">
+                        <h3>Movie Title 1</h3>
+                        <p>2024 • Action</p>
+                    </div>
                 </div>
+                <!-- Repeat movie cards as needed -->
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <div class="social-icons">
-            <a href="#" aria-label="Twitter" rel="noopener">
-                <svg viewBox="0 0 24 24"><path d="M22 5.8a8.5 8.5 0 0 1-2.4.7 4.3 4.3 0 0 0 1.9-2.4 8.5 8.5 0 0 1-2.7 1 4.3 4.3 0 0 0-7.3 3.9 12.2 12.2 0 0 1-8.8-4.5 4.3 4.3 0 0 0 1.3 5.7 4.3 4.3 0 0 1-1.9-.5v.1a4.3 4.3 0 0 0 3.4 4.2 4.3 4.3 0 0 1-1.9.1 4.3 4.3 0 0 0 4 3 8.6 8.6 0 0 1-5.3 1.8A8.7 8.7 0 0 1 2 18.3a12.2 12.2 0 0 0 6.6 1.9c7.9 0 12.2-6.5 12.2-12.2v-.6A8.7 8.7 0 0 0 22 5.8z"/></svg>
-            </a>
-            <!-- Add other social icons similarly -->
-        </div>
-        <p>&copy; 2024 Full Movies. All rights reserved.</p>
-        <p>Contact us: <a href="mailto:info@fullmovies.com">info@fullmovies.com</a></p>
-    </footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Your ultimate destination for streaming movies and TV shows. Watch anywhere, anytime.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#" class="nav-link">FAQ</a></p>
+                <p><a href="#" class="nav-link">Help Center</a></p>
+                <p><a href="#" class="nav-link">Terms of Use</a></p>
+                <p><a href="#" class="nav-link">Privacy Policy</a></p>
+            </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Handle carousel infinite scroll
-            const carousel = document.querySelector('.carousel-container');
-            const slides = document.querySelector('.carousel-slide');
-            
-            // Clone slides for smooth infinite scroll
-            carousel.appendChild(slides.cloneNode(true));
-            
-            // Reset animation when it completes
-            carousel.addEventListener('animationend', () => {
-                carousel.style.animation = 'none';
-                carousel.offsetHeight; // Trigger reflow
-                carousel.style.animation = null;
-            });
-        });
-    </script>
-</body>
-</html>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M22 5.8a8.5 8.5 0 0 1-2.4.7 4.3 4.3 0 0 0 1.9-2.4 8.5 8.5 0
